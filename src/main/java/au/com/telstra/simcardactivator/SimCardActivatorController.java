@@ -3,10 +3,17 @@ package au.com.telstra.simcardactivator;
 // import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 // import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 
 
@@ -43,4 +50,19 @@ public class SimCardActivatorController {
         }
 
     }
+
+    @GetMapping("/customer")
+    public SimCardRecordReturn getCustomerByID(@RequestParam Long id, SimCardRecordRepository repository) {
+        Optional<SimCardRecord> record = repository.findById(id);
+        if (record.isEmpty()) {
+            return null;
+        } else {
+            return new SimCardRecordReturn(
+                record.get().getIccid(),
+                record.get().getCustomerEmail(),
+                record.get().isActive()
+            );
+        }
+    }
+
 }
