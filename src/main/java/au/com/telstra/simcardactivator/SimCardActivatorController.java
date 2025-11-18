@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 public class SimCardActivatorController {
 
 	@PostMapping("/activateSimCard")
-	public void receiveActivationRequest(@RequestBody MyRequestBody requestBody) {
+	public ResponseFromActivator receiveActivationRequest(@RequestBody MyRequestBody requestBody) {
         // Access data from the requestBody object
         String iccid = requestBody.getIccid();
         String customerEmail = requestBody.getCustomerEmail();
@@ -46,6 +46,8 @@ public class SimCardActivatorController {
         } else {
             System.out.println("SIM card activation failed for ICCID: " + iccid);
         }
+
+        return response;
 
     }
 

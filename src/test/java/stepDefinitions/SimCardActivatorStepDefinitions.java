@@ -26,16 +26,11 @@ public class SimCardActivatorStepDefinitions {
     private String activatorUrl = "http://localhost:8080/activateSimCard";
     private ResponseFromActivator response;
 
-    @Given("sim_card_iccid is 1255789453849037777")
-    public void sim_card_iccid_is_1255789453849037777() {
-        iccid = "1255789453849037777";
+    @Given("sim_card_iccid is {string}")
+    public void sim_card_iccid_is(String iccidValue) {
+        iccid = iccidValue;
     }
 
-    
-    @Given("sim_card_iccid is 8944500102198304826")
-    public void sim_card_iccid_is_8944500102198304826() {
-        iccid = "8944500102198304826";
-    }
 
     @When("I send a request to activate the sim card")
     public void i_send_a_request_to_activate_the_sim_card() {
