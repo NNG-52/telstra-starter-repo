@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-
 
 
 
@@ -35,12 +33,12 @@ public class SimCardActivatorController {
         RequestToActivator requestToActivator = new RequestToActivator();
         requestToActivator.setIccid(iccid);
 
-        String activatorUrl = "http://localhost:8444/actuate";
+        String actuatorUrl = "http://localhost:8444/actuate";
 
         RestTemplate restTemplate = new RestTemplate();      
 
         // send request to activator service
-        ResponseFromActivator response = restTemplate.postForObject(activatorUrl, requestToActivator, ResponseFromActivator.class);
+        ResponseFromActivator response = restTemplate.postForObject(actuatorUrl, requestToActivator, ResponseFromActivator.class);
 
         // verify response
         if (response != null && response.isSuccess()) {
